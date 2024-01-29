@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "app": "nodemon app.js"
+    "app": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

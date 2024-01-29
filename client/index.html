@@ -1,13 +1,18 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <title>API</title>
+    <title>Form Example</title>
 </head>
 <body>
-    <h1>Hellow world</h1>
+    <form id="myForm" action="https://automatic-capybara-4j75wj7gjxrrh7pwr-5000.app.github.dev/submit-form" method="POST">
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="script.js"></script>
 </body>
 </html>
