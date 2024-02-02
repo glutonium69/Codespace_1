@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     time: {
-        type: String,
+        type: Date,
         default: Date.now(),
         immutable: true
     }

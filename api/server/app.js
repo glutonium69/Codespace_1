@@ -1,43 +1,33 @@
 import express from "express";
 import cors from "cors"
-import mongoose from "mongoose";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
+
+
 dotenv.config();
 
-import { connectDB } from "./db/connect.js";
-import { UserModel } from "./db/models/UserModel.js";
+import { userRouter } from "./routes/userRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.set('view engine', 'pug');
-
+app.use(bodyParser.json({extended: true }));
+app.use(bodyParser.urlencoded({extended: true }));
 app.use(cors())
+app.use("/user", userRouter);
+
+
+// Get the directory name using import.meta.url
+const __filename = fileURLToPath(import.meta.url);
+console.log(__filename);
+const __dirname = dirname(__filename);
 
 app.once("ready", () => console.log("Server is ready"));
 
 app.listen(PORT, () => console.log("Listening to port " + PORT));
 
-
 app.get("/", (req, res) => {
-    res.send("<h2>Server is ON BABYYYYYYY</h2>");
+    res.sendFile(join(__dirname, '../views/logIn.html'));
 })
-
-// app.post("/", async (req, res) => {
-
-//     try {
-//         await connectDB();
-//         const user = await UserModel.find({ email: email, password: password })
-//         if(user.length === 0){
-//             res.status(404).json({status: false, message: "Element not found in the database"})
-//         }else{
-//             res.status(200)
-//         }
-
-//     } catch (error) {
-//         console.log(error)   
-//     }
-//     finally{
-//         await mongoose.disconnect();
-//     }
-// })
