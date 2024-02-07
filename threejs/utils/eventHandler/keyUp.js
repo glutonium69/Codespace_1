@@ -1,5 +1,5 @@
-export function handleKeyup(event, keyPressed){
-    switch (event.key) {
+export function handleKeyup(key, keyPressed){
+    switch (key) {
         case "w":
             keyPressed.w = false;
             break;
@@ -9,7 +9,7 @@ export function handleKeyup(event, keyPressed){
             break;
     }
 
-    switch (event.key) {
+    switch (key) {
         case "a":
             keyPressed.a = false;
             break;

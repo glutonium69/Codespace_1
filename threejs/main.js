@@ -33,16 +33,20 @@ window.addEventListener("keydown", event => {
 
 	if(!scene.getObjectByName("ship")) return;
 
-	handleKeydown(event, keyPressed);
-	shipProp.accelarating = true;
+	handleKeydown(event.key.toLowerCase(), keyPressed);
+
+	if("ws".includes(event.key.toLowerCase()))
+		shipProp.accelarating = true;
 });
 
 window.addEventListener("keyup", event => {
 	
 	if(!scene.getObjectByName("ship")) return;
 	
-	handleKeyup(event, keyPressed);
-	shipProp.accelarating = false;
+	handleKeyup(event.key.toLowerCase(), keyPressed);
+
+	if("ws".includes(event.key.toLowerCase()))
+		shipProp.accelarating = false;
 });
 
 function animate() {
