@@ -7,6 +7,10 @@ export function handleKeydown(key, keyPressed){
         case "s":
             keyPressed.s = true;
             break;
+
+        case "shift":
+            keyPressed.shift = true;
+            break;
     }
 
     switch (key) {
@@ -16,6 +20,14 @@ export function handleKeydown(key, keyPressed){
 
         case "d":
             keyPressed.d = true;
+            break;
+
+        case "q":
+            keyPressed.q = true;
+            break;
+
+        case "e":
+            keyPressed.e = true;
             break;
     }
 }

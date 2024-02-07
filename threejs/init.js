@@ -14,9 +14,12 @@ export const camera = new PerspectiveCamera(55, window.innerWidth / window.inner
 // orbit.update();
 
 const cameraOffset = new Vector3(0.0, 40.0, 80.0);
+camera.lookAt(new Vector3(0, 3, -90));
 camera.rotateX(-0.3)
 camera.position.copy(cameraOffset);
 camera["cameraOffset"] = cameraOffset;
+camera.name = "camera";
+scene.add(camera);
 
 const light = new AmbientLight( 0xffffff ); // soft white light
 scene.add(light);

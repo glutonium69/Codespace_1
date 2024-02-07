@@ -14,18 +14,21 @@ const keyPressed = {
 	s: false,
 	a: false,
 	d: false,
+	q: false,
+	else: false,
+	shift: false
 }
 
 const shipProp = {
-	linearVelocity: 0,
-	accelaration: 0.5,
-	deccelaration: -0.1,
-	maxVelocity: 5,
-	accelarating: false
+	angularVelocity: 0.01, // determines how fast ship rotates horizontally
+	turningVelocity: 1, // determines how fast ship titls
+	linearVelocity: 0, // keeps track of ship's velocity
+	accelaration: 0.1, // determines how fast ship accelerates
+	deccelaration: -0.1, // determines how fast ship decelerates
+	maxVelocity: 4, // maximum velocity of the ship
+	boostVelocity: 10, // maximum velocity upon providing boost
+	accelarating: false // determines ships state that is, if user is trying to move the ship or not
 }
-
-
-let moveShip = false;
 
 checkWBGL() && loadShip(animate, scene);
 
@@ -53,8 +56,15 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	
-	controlShip(scene.getObjectByName("ship"), shipProp, keyPressed);
+	controlShip(scene.getObjectByName("shipModel") ,scene.getObjectByName("ship"), shipProp, keyPressed);
 	controlCamera(scene.getObjectByName("ship"), shipProp, camera);
 
 	stats.update();
 }
+
+
+window.addEventListener("resize", () => {
+	camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+});
