@@ -5,6 +5,9 @@ import { controlShip } from './utils/controlShip.js';
 import { controlCamera } from './utils/controlCamera.js';
 import { handleKeydown } from './utils/eventHandler/keyDown.js';
 import { handleKeyup } from './utils/eventHandler/keyUp.js';
+import Stats from 'three/examples/jsm/libs/stats.module'
+const stats = new Stats()
+document.body.appendChild(stats.dom)
 
 const keyPressed = {
 	w: false,
@@ -23,7 +26,6 @@ const shipProp = {
 
 
 let moveShip = false;
-
 
 checkWBGL() && loadShip(animate, scene);
 
@@ -49,4 +51,6 @@ function animate() {
 	
 	controlShip(scene.getObjectByName("ship"), shipProp, keyPressed);
 	controlCamera(scene.getObjectByName("ship"), shipProp, camera);
+
+	stats.update();
 }
