@@ -11,6 +11,14 @@ export function handleKeydown(key, keyPressed){
         case "shift":
             keyPressed.shift = true;
             break;
+
+        case "arrowup":
+            keyPressed.arrowup = true;
+            break;
+
+        case "arrowdown":
+            keyPressed.arrowdown = true;
+            break;
     }
 
     switch (key) {
@@ -22,12 +30,12 @@ export function handleKeydown(key, keyPressed){
             keyPressed.d = true;
             break;
 
-        case "q":
-            keyPressed.q = true;
+        case "arrowleft":
+            keyPressed.arrowleft = true;
             break;
 
-        case "e":
-            keyPressed.e = true;
+        case "arrowright":
+            keyPressed.arrowright = true;
             break;
     }
 }
