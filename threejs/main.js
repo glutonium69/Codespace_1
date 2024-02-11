@@ -1,11 +1,11 @@
 import { scene, camera, renderer } from './init.js';
-import { createPlanets } from './utils/createPlantes.js';
-import { checkWBGL } from './utils/checkWEBGL';
-import { loadShip } from './utils/loadShip';
-import { controlShip } from './utils/controlShip.js';
-import { keyPressed, shipProp, planets } from './utils/objectsProp.js';
-import { invokeEventListeners } from './utils/eventListeners.js';
-import { animatePlanets } from './utils/animatePlanets.js';
+import { createPlanets } from './functions/createPlantes.js';
+import { checkWBGL } from './functions/checkWEBGL.js';
+import { loadShip } from './functions/loadShip.js';
+import { controlShip } from './functions/controlShip.js';
+import { keyPressed, shipProp, planets } from './functions/objectsProp.js';
+import { invokeEventListeners } from './functions/eventListeners.js';
+import { animatePlanets } from './functions/animatePlanets.js';
 import Stats from 'three/examples/jsm/libs/stats.module'
 const stats = new Stats()
 document.body.appendChild(stats.dom)
