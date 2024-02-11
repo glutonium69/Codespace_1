@@ -6,9 +6,10 @@ const rocketUrl = new URL("../assets/ship.gltf", import.meta.url);
 
 export function loadShip(animate, scene){
     
-    const pivot = new Object3D();
-    pivot.name = "ship";
-    scene.add(pivot);
+    const shipPivot = new Object3D();
+    shipPivot.name = "ship";
+    shipPivot.position.z = 5000;
+    scene.add(shipPivot);
 
     const loader = new GLTFLoader();
 
@@ -21,8 +22,8 @@ export function loadShip(animate, scene){
             rocket.name = "shipModel";
             // rocket.scale.set(3, 3, 3);
             rocket.rotation.set(-Math.PI / 2, -Math.PI / 2, 0);
-            pivot.add(rocket);
-            pivot.add(scene.getObjectByName("camera"))
+            shipPivot.add(rocket);
+            shipPivot.add(scene.getObjectByName("camera"))
 
             const boundingBox = new Box3().setFromObject(rocket);
             const shipLength = boundingBox.max.z - boundingBox.min.z;

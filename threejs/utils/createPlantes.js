@@ -11,12 +11,12 @@ import {
 
 
 
-export function createPlanets(scene, planets){
+export function createPlanets(scene, planets, camera){
     
     const textureLoader = new TextureLoader();
     const texturePath = "../assets/textures/";
-    const earthRadius = 50;
-    const rotationAmplifier = 0.05;
+    const earthRadius = 30;
+    const rotationAmplifier = 0.0;
     const distanceFromSunAmplifier = 2;
     const earthOrbitRotation = 0.1; // Increase the orbit rotation speed for better visualization
     const earthAxisRotation = 0.05; // Keep the axis rotation speed the same as before
@@ -103,7 +103,7 @@ export function createPlanets(scene, planets){
         map: textureLoader.load(texturePath + "sun.jpg")
     });
     const sun = new Mesh(sunG, sunM);
-    sun.position.set(0, 0, -5000);
+    sun.position.set(0, 0, 0);
 
     const pointLight = new PointLight(0xffff00 ,500, 5000);
     pointLight.position.copy(sun.position);
@@ -153,4 +153,7 @@ export function createPlanets(scene, planets){
             orbitRotation: prop.orbitRotation
         });
     }
+
+    camera.far = planetProps.at(-1).distanceFromSun * 2;
+    camera.updateProjectionMatrix();
 }

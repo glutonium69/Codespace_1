@@ -8,12 +8,12 @@ export const renderer = new WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-export const camera = new PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 10000);
+export const camera = new PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 5000);
 // const orbit = new OrbitControls(camera, renderer.domElement);
 // orbit.update();
 
-const cameraOffset = new Vector3(0.0, 20.0, 50.0);
-camera.lookAt(new Vector3(0, -3, -110));
+const cameraOffset = new Vector3(0, 30, 50);
+camera.lookAt(new Vector3(0, -3, -5000));
 camera.rotateX(-0.3)
 camera.position.copy(cameraOffset);
 camera.name = "camera";
