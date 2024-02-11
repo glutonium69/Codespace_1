@@ -11,16 +11,14 @@ import {
 
 
 
-export function createPlanets(scene, planets){
+export function createPlanets(scene, planets, camera){
     
     const textureLoader = new TextureLoader();
     const texturePath = "../assets/textures/";
     const earthRadius = 50;
     const rotationAmplifier = 0.05;
     const distanceFromSunAmplifier = 2;
-    const earthOrbitRotation = 0.1; // Increase the orbit rotation speed for better visualization
-    const earthAxisRotation = 0.05; // Keep the axis rotation speed the same as before
-    
+
     const planetProps = [
         {
             // Mercury
@@ -36,8 +34,8 @@ export function createPlanets(scene, planets){
             texture: "venus.jpg",
             distanceFromSun: 2000 * distanceFromSunAmplifier,
             radius: earthRadius,
-            orbitRotation: earthOrbitRotation * rotationAmplifier,
-            axisRotation: earthAxisRotation * rotationAmplifier,
+            orbitRotation: (360 / 225) * rotationAmplifier,
+            axisRotation: (360 / 5832) * rotationAmplifier,
             lightColor: 0xffffff
         },
         {
@@ -103,12 +101,8 @@ export function createPlanets(scene, planets){
         map: textureLoader.load(texturePath + "sun.jpg")
     });
     const sun = new Mesh(sunG, sunM);
-    sun.position.set(0, 0, -5000);
+    scene.add(sun);
 
-    const pointLight = new PointLight(0xffff00 ,500, 5000);
-    pointLight.position.copy(sun.position);
-
-    scene.add(sun, pointLight);
     planets.push({
         sphere: sun,
         parent: null,
@@ -153,4 +147,8 @@ export function createPlanets(scene, planets){
             orbitRotation: prop.orbitRotation
         });
     }
+
+    camera.far = planetProps.at(-1).distanceFromSun * 2;
+    camera.updateProjectionMatrix();
+
 }

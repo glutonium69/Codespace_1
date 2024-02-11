@@ -8,7 +8,7 @@ export const renderer = new WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-export const camera = new PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 10000);
+export const camera = new PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 5000);
 // const orbit = new OrbitControls(camera, renderer.domElement);
 // orbit.update();
 
