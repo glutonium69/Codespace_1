@@ -6,7 +6,8 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 		slowDownShip(shipProp)
 	}
 
-	const currentShipRotationY = radToDeg(shipModel.rotation.y)
+	const currentShipRotationY = radToDeg(shipModel.rotation.y);
+	// const currentShipRotationX = radToDeg(ship.rotation.x);
 	
 	if(currentShipRotationY <= -45){
 		keyPressed.a && goLeft(shipModel, ship, shipProp);
@@ -18,23 +19,29 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 	if(!keyPressed.a && !keyPressed.d && currentShipRotationY > -90){
 		shipModel.rotation.y -= degToRad(1);
 	}
-	
-	updateVelocity(keyPressed, shipProp)
-	moveShipForward(ship, shipProp);
-	
-	keyPressed.arrowup && goDown(ship);
-	keyPressed.arrowdown && goUp(ship);
+
+	// if(!keyPressed.arrowup && !keyPressed.arrowdown && ship.rotation.x !== 0){
+		// 	if(currentShipRotationX > 0) ship.rotation.x -= degToRad(0.05);
+		// 	if(currentShipRotationX < 0) ship.rotation.x += degToRad(0.05);
+	// 	if(currentShipRotationX > -0.3 && currentShipRotationX < 0.3) ship.rotation.x = 0;
+	// }
+
+	(keyPressed.w || keyPressed.s) && updateVelocity(keyPressed, shipProp, ship)
+	// keyPressed.arrowup && goDown(ship);
+	// keyPressed.arrowdown && goUp(ship);
 	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
 	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
 }
 
-function updateVelocity(keyPressed, shipProp){
-
+function updateVelocity(keyPressed, shipProp, ship){
+	
 	if(keyPressed.w && shipProp.linearVelocity <= shipProp.maxVelocity)
-		shipProp.linearVelocity += shipProp.accelaration;
+	shipProp.linearVelocity += shipProp.accelaration;
 
 	if(keyPressed.s && Math.abs(shipProp.linearVelocity) <= shipProp.maxVelocity)
-		shipProp.linearVelocity -= shipProp.accelaration
+	shipProp.linearVelocity -= shipProp.accelaration
+
+	moveShipForward(ship, shipProp);
 
 }
 
@@ -42,10 +49,10 @@ function moveShipForward(ship, shipProp) {
 	// Get the ship's forward vector
 	const forwardVector = new Vector3(0, 0, -1);
 	forwardVector.applyQuaternion(ship.quaternion);
-
+	
 	// Normalize the vector to maintain direction while scaling it to a unit vector
 	forwardVector.normalize();
-
+	
 	// Calculate the new position by moving the ship along its forward vector
 	const newPosition = ship.position.clone().add(forwardVector.multiplyScalar(shipProp.linearVelocity));
 
@@ -96,7 +103,6 @@ function goDown(ship){
 		)
 	);
 }
-
 
 function radToDeg(rad) {
     return rad * 180 / Math.PI;
