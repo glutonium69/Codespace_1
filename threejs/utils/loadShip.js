@@ -12,7 +12,7 @@ export function loadShip(animate, scene){
 
     const loader = new GLTFLoader();
 
-    loader.load(
+    loader.load( 
         rocketUrl.href, 
 
         (gltf) => {
