@@ -8,6 +8,7 @@ export function loadShip(animate, scene){
     
     const pivot = new Object3D();
     pivot.name = "ship";
+    // pivot.position.set(0, 10000, 50000);
     pivot.position.z = 5000;
     scene.add(pivot);
 

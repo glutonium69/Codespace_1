@@ -98,7 +98,9 @@ export function createPlanets(scene, planets, camera){
 
     const sunG = new SphereGeometry(earthRadius * 50);
     const sunM = new MeshBasicMaterial({
-        map: textureLoader.load(texturePath + "sun.jpg")
+        map: textureLoader.load(texturePath + "sun.jpg"),
+        side: DoubleSide
+
     });
     const sun = new Mesh(sunG, sunM);
     scene.add(sun);
@@ -114,7 +116,8 @@ export function createPlanets(scene, planets, camera){
 
         const sphereG = new SphereGeometry(prop.radius);
         const sphereM = new MeshBasicMaterial({
-            map: textureLoader.load(texturePath + (prop.texture))
+            map: textureLoader.load(texturePath + (prop.texture)),
+            side: DoubleSide
         });
         const sphere = new Mesh(sphereG, sphereM);
 
@@ -123,8 +126,9 @@ export function createPlanets(scene, planets, camera){
         parent.add(sphere);
         scene.add(parent);
 
-        sphere.position.x = prop.distanceFromSun * Math.cos(Math.random() * 360 * Math.PI / 180) ;
-        sphere.position.z = prop.distanceFromSun * Math.sin(Math.random() * 360 * Math.PI / 180) ;
+        const theta = Math.random() * 360 * Math.PI / 180; 
+        sphere.position.x = prop.distanceFromSun * Math.cos(theta) ;
+        sphere.position.z = prop.distanceFromSun * Math.sin(theta) ;
 
         if(prop.texture === "saturn.jpg"){
 
