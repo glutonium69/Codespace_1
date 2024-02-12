@@ -16,7 +16,7 @@ export function createPlanets(scene, planets, camera){
     const textureLoader = new TextureLoader();
     const texturePath = "../assets/textures/";
     const earthRadius = 50;
-    const rotationAmplifier = 0.05;
+    const rotationAmplifier = 0.01;
     const distanceFromSunAmplifier = 2;
 
     const planetProps = [

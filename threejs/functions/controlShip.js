@@ -8,12 +8,8 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 	
 	const currentShipRotationY = radToDeg(shipModel.rotation.y);
 	
-	if(currentShipRotationY <= -45){
-		keyPressed.a && goLeft(shipModel, ship, shipProp);
-		keyPressed.d && goRight(shipModel, ship, shipProp);
-	}else{
-		shipModel.rotation.y = degToRad(-45);
-	}
+	keyPressed.a && goLeft(shipModel, ship, shipProp, currentShipRotationY);
+	keyPressed.d && goRight(shipModel, ship, shipProp, currentShipRotationY);
 
 	if(!keyPressed.a && !keyPressed.d && currentShipRotationY > -90){
 		shipModel.rotation.y -= degToRad(1);
@@ -22,19 +18,21 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 	if(keyPressed.shift){
 		provideBoost(shipProp, ship);
 	}else if((keyPressed.w || keyPressed.s) && !keyPressed.shift){
-		updateVelocity(keyPressed, shipProp, ship)
+		updateVelocity(keyPressed, shipProp)
 	}
 
 	keyPressed.arrowup && goDown(ship);
 	keyPressed.arrowdown && goUp(ship);
 	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
 	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
+
+	moveShipForward(ship, shipProp);
 }
 
-function updateVelocity(keyPressed, shipProp, ship){
+function updateVelocity(keyPressed, shipProp){
 
 	if(shipProp.linearVelocity > shipProp.maxVelocity){
-		shipProp.linearVelocity -= shipProp.boostAccelaration;
+		shipProp.linearVelocity -= (shipProp.boostAccelaration * 5);
 		return;
 	}
 	
@@ -44,9 +42,7 @@ function updateVelocity(keyPressed, shipProp, ship){
 	if(keyPressed.s && Math.abs(shipProp.linearVelocity) <= shipProp.maxVelocity)
 		shipProp.linearVelocity -= shipProp.accelaration
 
-	moveShipForward(ship, shipProp);
 }
-
 
 function provideBoost(shipProp, ship){
 	if(shipProp.linearVelocity <= shipProp.boostVelocity){
@@ -71,7 +67,6 @@ function moveShipForward(ship, shipProp) {
 }
 
 function slowDownShip(shipProp){
-	
 	// deccelerate ship when moving forward when forward button not pressed
 	if(shipProp.linearVelocity > 0)
 		shipProp.linearVelocity += shipProp.deccelaration;
@@ -87,13 +82,13 @@ function slowDownShip(shipProp){
 		shipProp.linearVelocity = 0; 
 }
 
-function goLeft(shipModel, ship, shipProp) { 
-	shipModel.rotateY(-degToRad(shipProp.turningVelocity));
+function goLeft(shipModel, ship, shipProp, currentShipRotationY) { 
+	currentShipRotationY <= -45 && shipModel.rotateY(-degToRad(shipProp.turningVelocity));
 	ship.rotateY(shipProp.angularVelocity)
 }
 
-function goRight(shipModel, ship, shipProp) { 
-	shipModel.rotateY(degToRad(shipProp.turningVelocity));
+function goRight(shipModel, ship, shipProp, currentShipRotationY) { 
+	currentShipRotationY <= -45 && shipModel.rotateY(degToRad(shipProp.turningVelocity));
 	ship.rotateY(-shipProp.angularVelocity)
 }
 
