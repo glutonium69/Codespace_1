@@ -26,12 +26,16 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
 	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
 
+	console.log(shipProp.linearVelocity)
+
 	moveShipForward(ship, shipProp);
 }
 
 function updateVelocity(keyPressed, shipProp){
 
-	if(shipProp.linearVelocity > shipProp.maxVelocity){
+	// 10 is being added here cause sometimes the linearVel goes a little above maxVel after a boost has been provided.. this causes the if block to run and linearVel to drop by a lot causing issue.
+	// adding 10 is there just to offset it by a little bit so it doesn't trigger  
+	if(shipProp.linearVelocity > (shipProp.maxVelocity + 10)){
 		shipProp.linearVelocity -= (shipProp.boostAccelaration * 5);
 		return;
 	}

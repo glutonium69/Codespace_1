@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 const rocketUrl = new URL("../assets/ship.gltf", import.meta.url);
 
 export function loadShip(animate, scene){
-    
+
     const pivot = new Object3D();
     pivot.name = "ship";
     pivot.position.set(0, 0, 50000);
