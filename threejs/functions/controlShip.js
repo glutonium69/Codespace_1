@@ -2,32 +2,30 @@ import { Vector3 } from "three";
 
 export function controlShip(shipModel, ship, shipProp, keyPressed){
 
-	if(!shipProp.accelarating  && shipProp.linearVelocity !== 0){
-		slowDownShip(shipProp)
-	}
-	
 	const currentShipRotationY = radToDeg(shipModel.rotation.y);
 	
 	keyPressed.a && goLeft(shipModel, ship, shipProp, currentShipRotationY);
 	keyPressed.d && goRight(shipModel, ship, shipProp, currentShipRotationY);
-
+	keyPressed.arrowup && goDown(ship);
+	keyPressed.arrowdown && goUp(ship);
+	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
+	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
+	
+	
 	if(!keyPressed.a && !keyPressed.d && currentShipRotationY > -90){
 		shipModel.rotation.y -= degToRad(1);
 	}
-
+	
 	if(keyPressed.shift){
 		provideBoost(shipProp, ship);
 	}else if((keyPressed.w || keyPressed.s) && !keyPressed.shift){
 		updateVelocity(keyPressed, shipProp)
 	}
-
-	keyPressed.arrowup && goDown(ship);
-	keyPressed.arrowdown && goUp(ship);
-	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
-	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
-
-	console.log(shipProp.linearVelocity)
-
+	
+	if(!shipProp.accelarating  && shipProp.linearVelocity !== 0){
+		slowDownShip(shipProp)
+	}
+	
 	moveShipForward(ship, shipProp);
 }
 
