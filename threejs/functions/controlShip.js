@@ -26,6 +26,7 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 		slowDownShip(shipProp)
 	}
 	
+	
 	moveShipForward(ship, shipProp);
 }
 
