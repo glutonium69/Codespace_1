@@ -3,7 +3,6 @@ import {
     TextureLoader,
     MeshBasicMaterial,
     Mesh,
-    PointLight,
     RingGeometry,
     DoubleSide,
     Object3D
@@ -11,13 +10,13 @@ import {
 
 
 
-export function createPlanets(scene, planets, camera){
+export function createPlanets(scene, planets, pCamera){
     
     const textureLoader = new TextureLoader();
     const texturePath = "../assets/textures/";
     const earthRadius = 50;
-    const rotationAmplifier = 0.01;
-    const distanceFromSunAmplifier = 2;
+    const rotationAmplifier = 0.05;
+    const distanceFromSunAmplifier = 1.8;
 
     const planetProps = [
         {
@@ -100,7 +99,6 @@ export function createPlanets(scene, planets, camera){
     const sunM = new MeshBasicMaterial({
         map: textureLoader.load(texturePath + "sun.jpg"),
         side: DoubleSide
-
     });
     const sun = new Mesh(sunG, sunM);
     scene.add(sun);
@@ -138,7 +136,7 @@ export function createPlanets(scene, planets, camera){
                 map: textureLoader.load(texturePath + prop.ringTexture)
             });
             const ring = new Mesh(ringG, ringM);
-            ring.rotateX(0.4660029);
+            ring.rotateX(0.5);
 
             parent.add(ring)
             ring.position.copy(sphere.position);
@@ -152,7 +150,7 @@ export function createPlanets(scene, planets, camera){
         });
     }
 
-    camera.far = planetProps.at(-1).distanceFromSun * 2;
-    camera.updateProjectionMatrix();
+    pCamera.far = planetProps.at(-1).distanceFromSun * 2;
+    pCamera.updateProjectionMatrix();
 
 }

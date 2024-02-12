@@ -8,7 +8,7 @@ export const keyPressed = {
 	arrowup: false, // climb down
 	arrowdown: false, // climb up
 	shift: false, // provide boost to the speed
-}
+};
 
 export const shipProp = {
 	angularVelocity: 0.02, // determines how fast ship rotates horizontally
@@ -20,6 +20,6 @@ export const shipProp = {
 	boostVelocity: 50, // maximum velocity upon providing boost
 	boostAccelaration: 5, // acceleration while providing boost
 	accelarating: false // determines ships state that is, if user is trying to move the ship or not
-}
+};
 
-export const planets = []
+export const planets = [];

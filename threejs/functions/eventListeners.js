@@ -1,4 +1,4 @@
-export function invokeEventListeners(scene, keyPressed, shipProp, camera, renderer){
+export function invokeEventListeners(scene, keyPressed, shipProp, pCamera, renderer){
 
     window.addEventListener("keydown", event => {
 
@@ -22,8 +22,8 @@ export function invokeEventListeners(scene, keyPressed, shipProp, camera, render
     
 
     window.addEventListener("resize", () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        pCamera.aspect = window.innerWidth / window.innerHeight;
+        pCamera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth, window.innerHeight );
     });
 }
