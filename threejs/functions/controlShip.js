@@ -6,8 +6,8 @@ export function controlShip(shipModel, ship, shipProp, keyPressed){
 	
 	keyPressed.a && goLeft(shipModel, ship, shipProp, currentShipRotationY);
 	keyPressed.d && goRight(shipModel, ship, shipProp, currentShipRotationY);
-	keyPressed.arrowup && goDown(ship);
-	keyPressed.arrowdown && goUp(ship);
+	// keyPressed.arrowup && goDown(ship);
+	// keyPressed.arrowdown && goUp(ship);
 	keyPressed.arrowleft && ship.rotateY(shipProp.angularVelocity * 1.5)
 	keyPressed.arrowright && ship.rotateY(-shipProp.angularVelocity * 1.5)
 	
