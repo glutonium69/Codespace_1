@@ -3,18 +3,22 @@ export function invokeEventListeners(scene, keyPressed, shipProp, pCamera, rende
     window.addEventListener("keydown", event => {
 
         if(!scene.getObjectByName("ship")) return;
-    
-        keyPressed[event.key.toLowerCase()] = true;
+   	
+	if(event.key === "b"){
+	    keyPressed.b = !keyPressed.b;
+	}
+	else keyPressed[event.key.toLowerCase()] = true;
     
         if("ws".includes(event.key.toLowerCase()))
             shipProp.accelarating = true;
+
     });
     
     window.addEventListener("keyup", event => {
         
         if(!scene.getObjectByName("ship")) return;
         
-        keyPressed[event.key.toLowerCase()] = false;
+        if(event.key !== "b") keyPressed[event.key.toLowerCase()] = false;
     
         if("ws".includes(event.key.toLowerCase()))
             shipProp.accelarating = false;

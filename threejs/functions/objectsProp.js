@@ -8,6 +8,7 @@ export const keyPressed = {
 	arrowup: false, // climb down
 	arrowdown: false, // climb up
 	shift: false, // provide boost to the speed
+	b: false,
 };
 
 export const shipProp = {

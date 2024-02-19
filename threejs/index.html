@@ -3,11 +3,39 @@
 	<head>
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
+    <script src="https://kit.fontawesome.com/dd5aff85b8.js" crossorigin="anonymous"></script>
 		<style>
-			body { margin: 0; }
+			body { margin: 0; overflow: hidden; }
+			span:has(i) {
+				position: absolute;
+				z-index: 2;
+				top: 50%;
+				left: 50%;
+				translate: -50% -50%;
+				color: white;
+				font-size: 0.5em;
+				display: flex;
+				flex-direction: column-reverse;
+				text-align: center;
+			}
+
+			.distance {
+				font-family: monospace;
+				font-size: 1.5em;
+			}
+
 		</style>
 	</head>
 	<body>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
+		<span><i class="fa-solid fa-caret-down"></i><span class="distance"></span></span>
 		<div id="container"></div>
 		<script type="module" src="/main.js"></script>
 	</body>

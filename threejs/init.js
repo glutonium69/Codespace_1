@@ -4,15 +4,15 @@ import {
     PerspectiveCamera,
     AmbientLight,
     Vector3,
+    Vector2,
     CubeTextureLoader,
 } from 'three';
 
 import starsTexture from "./assets/textures/stars.jpg";
 
 export const scene = new Scene();
-export const renderer = new WebGLRenderer({ antialias: true });
+export const renderer = new WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.autoClear = false;
 document.body.appendChild(renderer.domElement);
 
 export const pCamera = new PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 5000);

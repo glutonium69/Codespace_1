@@ -16,12 +16,13 @@ export function createPlanets(scene, planets, pCamera){
     const texturePath = "../assets/textures/";
     const earthRadius = 50;
     const rotationAmplifier = 0.05;
-    const distanceFromSunAmplifier = 2;
+    const distanceFromSunAmplifier = 4;
 
     const planetProps = [
         {
             // Mercury
-            texture: "mercury.jpg",
+	    name: "mercury", 
+	    texture: "mercury.jpg",
             distanceFromSun: 1500 * distanceFromSunAmplifier,
             radius: earthRadius * 0.382,
             orbitRotation: (360 / 88) * rotationAmplifier,
@@ -30,6 +31,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Venus
+	    name: "venus", 
             texture: "venus.jpg",
             distanceFromSun: 2000 * distanceFromSunAmplifier,
             radius: earthRadius,
@@ -39,6 +41,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Earth
+	    name: "earth", 
             texture: "earth.jpg",
             distanceFromSun: 3000 * distanceFromSunAmplifier,
             radius: earthRadius,
@@ -48,6 +51,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Mars
+	    name: "mars", 
             texture: "mars.jpg",
             distanceFromSun: 5500 * distanceFromSunAmplifier,
             radius: earthRadius * 0.532,
@@ -57,6 +61,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Jupiter
+	    name: "jupiter", 
             texture: "jupiter.jpg",
             distanceFromSun: 8000 * distanceFromSunAmplifier,
             radius: earthRadius * 11.21,
@@ -66,6 +71,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Saturn
+	    name: "saturn", 
             texture: "saturn.jpg",
             ringTexture: "saturnRing.jpg",
             distanceFromSun: 10000 * distanceFromSunAmplifier,
@@ -76,6 +82,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Uranus
+	    name: "uranus", 
             texture: "uranus.jpg",
             distanceFromSun: 12000 * distanceFromSunAmplifier,
             radius: earthRadius * 4.01,
@@ -85,6 +92,7 @@ export function createPlanets(scene, planets, pCamera){
         },
         {
             // Neptune
+	    name: "neptune", 
             texture: "neptune.jpg",
             distanceFromSun: 14000 * distanceFromSunAmplifier,
             radius: earthRadius * 3.88,
@@ -101,13 +109,22 @@ export function createPlanets(scene, planets, pCamera){
         side: DoubleSide
     });
     const sun = new Mesh(sunG, sunM);
+    
+    const sunBlip = new Object3D();
+    sun.add(sunBlip);
+    sunBlip.position.y += (earthRadius * 50); 
+    sunBlip.name = "blip";
+    sun.add(sunBlip);
     scene.add(sun);
 
     planets.push({
+	name: "sun",
         sphere: sun,
+	radius: earthRadius * 50,
         parent: null,
         axisRotation: (360 / (26 * 24)) * rotationAmplifier,
-        orbitRotation: null
+        orbitRotation: null,
+	currentSegmentCount: 16
     });
 
     for(let prop of planetProps){
@@ -118,11 +135,30 @@ export function createPlanets(scene, planets, pCamera){
             side: DoubleSide
         });
         const sphere = new Mesh(sphereG, sphereM);
-
-        const parent = new Object3D();
+        
+	const parent = new Object3D();
         parent.position.copy(sun.position);
         parent.add(sphere);
         scene.add(parent);
+	
+	const blip = new Object3D();
+	blip.name = "blip";
+	sphere.add(blip);
+	blip.position.y += prop.radius;
+	
+	if(prop.name === "earth"){
+	    const moonRadius = prop.radius * 0.3;
+	    const moonG = new SphereGeometry(moonRadius);
+	    const moonM = new MeshBasicMaterial({
+                map: textureLoader.load(texturePath + "moon.jpg"),
+		side: DoubleSide
+	    })
+
+	    const moon = new Mesh(moonG, moonM);
+	    sphere.add(moon);
+	    moon.position.x += (prop.radius + moonRadius + 100);
+	}
+
 
         const theta = Math.random() * 360 * Math.PI / 180; 
         sphere.position.x = prop.distanceFromSun * Math.cos(theta) ;
@@ -143,14 +179,16 @@ export function createPlanets(scene, planets, pCamera){
         }
 
         planets.push({
+	    name: prop.name,
             sphere: sphere,
+	    radius: prop.radius,
             parent: parent,
             axisRotation: prop.axisRotation,
-            orbitRotation: prop.orbitRotation
+            orbitRotation: prop.orbitRotation,
+	    currentSegmentCount: 16
         });
     }
 
     pCamera.far = planetProps.at(-1).distanceFromSun * 2;
     pCamera.updateProjectionMatrix();
-
 }

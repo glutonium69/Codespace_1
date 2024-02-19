@@ -23,7 +23,6 @@ export function loadShip(animate, scene, pCamera){
             rocket.name = "shipModel";
             rocket.rotation.set(-Math.PI / 2, -Math.PI / 2, 0);
 
-
             const geometry = new BufferGeometry();
             geometry.setAttribute('position', new BufferAttribute(new Float32Array([
                 0,    200, 0,
