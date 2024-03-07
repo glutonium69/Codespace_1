@@ -12,9 +12,6 @@ export function setBlips(planets, camera, ship, scene) {
             const halfW = innerWidth / 2;
             const halfH = innerHeight / 2;
             
-	    const halfTextW = text[i].getBoundingClientRect().width / 2;
-            const halfTextH = text[i].getBoundingClientRect().height / 2;
-
             let x = (vec3.x * halfW) + halfW;
             let y = -(vec3.y * halfH) + halfH;
 	    

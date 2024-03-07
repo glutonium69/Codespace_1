@@ -39,8 +39,7 @@ function animate() {
     animatePlanets(planets);
     controlShip(scene.getObjectByName("shipModel"), scene.getObjectByName("ship"), shipProp, keyPressed);
     stats.update();
-    updatePolygons(scene.getObjectByName("ship"), planets);    
-   
+    updatePolygons(scene.getObjectByName("ship"), planets, pCamera);    
     setBlips(planets, pCamera, scene.getObjectByName("ship"), scene);    
     keyPressed.b ? composer.render() : renderer.render(scene, pCamera);
 }

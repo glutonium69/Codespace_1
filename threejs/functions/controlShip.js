@@ -87,7 +87,7 @@ function slowDownShip(shipProp){
 
 function goLeft(shipModel, ship, shipProp, currentShipRotationY) { 
 	currentShipRotationY <= -45 && shipModel.rotateY(-degToRad(shipProp.turningVelocity));
-	ship.rotateY(shipProp.angularVelocity)
+	ship.rotateY(shipProp.angularVelocity);
 }
 
 function goRight(shipModel, ship, shipProp, currentShipRotationY) { 

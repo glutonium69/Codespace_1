@@ -15,58 +15,58 @@ export function createPlanets(scene, planets, pCamera){
     const textureLoader = new TextureLoader();
     const texturePath = "../assets/textures/";
     const earthRadius = 50;
-    const rotationAmplifier = 0.05;
-    const distanceFromSunAmplifier = 4;
+    const rotationMultiplier = 0.05;
+    const distanceFromSunMultiplier = 4;
 
     const planetProps = [
         {
             // Mercury
 	    name: "mercury", 
 	    texture: "mercury.jpg",
-            distanceFromSun: 1500 * distanceFromSunAmplifier,
+            distanceFromSun: 1500 * distanceFromSunMultiplier,
             radius: earthRadius * 0.382,
-            orbitRotation: (360 / 88) * rotationAmplifier,
-            axisRotation: (360 / 1407) * rotationAmplifier,
+            orbitRotation: (360 / 88) * rotationMultiplier,
+            axisRotation: (360 / 1407) * rotationMultiplier,
             lightColor: 0xffffff
         },
         {
             // Venus
 	    name: "venus", 
             texture: "venus.jpg",
-            distanceFromSun: 2000 * distanceFromSunAmplifier,
+            distanceFromSun: 2000 * distanceFromSunMultiplier,
             radius: earthRadius,
-            orbitRotation: (360 / 225) * rotationAmplifier,
-            axisRotation: (360 / 5832) * rotationAmplifier,
+            orbitRotation: (360 / 225) * rotationMultiplier,
+            axisRotation: (360 / 5832) * rotationMultiplier,
             lightColor: 0xffffff
         },
         {
             // Earth
 	    name: "earth", 
             texture: "earth.jpg",
-            distanceFromSun: 3000 * distanceFromSunAmplifier,
+            distanceFromSun: 3000 * distanceFromSunMultiplier,
             radius: earthRadius,
-            orbitRotation: (360 / 365) * rotationAmplifier,
-            axisRotation: (360 / 24) * rotationAmplifier,
+            orbitRotation: (360 / 365) * rotationMultiplier,
+            axisRotation: (360 / 24) * rotationMultiplier,
             lightColor: 0x0000ff
         },
         {
             // Mars
 	    name: "mars", 
             texture: "mars.jpg",
-            distanceFromSun: 5500 * distanceFromSunAmplifier,
+            distanceFromSun: 5500 * distanceFromSunMultiplier,
             radius: earthRadius * 0.532,
-            orbitRotation: (360 / 687) * rotationAmplifier,
-            axisRotation: (360 / 25) * rotationAmplifier,
+            orbitRotation: (360 / 687) * rotationMultiplier,
+            axisRotation: (360 / 25) * rotationMultiplier,
             lightColor: 0xff0000
         },
         {
             // Jupiter
 	    name: "jupiter", 
             texture: "jupiter.jpg",
-            distanceFromSun: 8000 * distanceFromSunAmplifier,
+            distanceFromSun: 8000 * distanceFromSunMultiplier,
             radius: earthRadius * 11.21,
-            orbitRotation: (360 / (12 * 365)) * rotationAmplifier, 
-            axisRotation: (360 / 10) * rotationAmplifier, 
+            orbitRotation: (360 / (12 * 365)) * rotationMultiplier, 
+            axisRotation: (360 / 10) * rotationMultiplier, 
             lightColor: 0xffaa00
         },
         {
@@ -74,30 +74,30 @@ export function createPlanets(scene, planets, pCamera){
 	    name: "saturn", 
             texture: "saturn.jpg",
             ringTexture: "saturnRing.jpg",
-            distanceFromSun: 10000 * distanceFromSunAmplifier,
+            distanceFromSun: 10000 * distanceFromSunMultiplier,
             radius: earthRadius * 9.45,
-            orbitRotation: (360 / (30 * 365)) * rotationAmplifier,
-            axisRotation: (360 / 11) * rotationAmplifier, 
+            orbitRotation: (360 / (30 * 365)) * rotationMultiplier,
+            axisRotation: (360 / 11) * rotationMultiplier, 
             lightColor: 0xffff00
         },
         {
             // Uranus
 	    name: "uranus", 
             texture: "uranus.jpg",
-            distanceFromSun: 12000 * distanceFromSunAmplifier,
+            distanceFromSun: 12000 * distanceFromSunMultiplier,
             radius: earthRadius * 4.01,
-            orbitRotation: (360 / (84 * 365)) * rotationAmplifier,
-            axisRotation: (360 / 17) * rotationAmplifier, 
+            orbitRotation: (360 / (84 * 365)) * rotationMultiplier,
+            axisRotation: (360 / 17) * rotationMultiplier, 
             lightColor: 0x00ffff
         },
         {
             // Neptune
 	    name: "neptune", 
             texture: "neptune.jpg",
-            distanceFromSun: 14000 * distanceFromSunAmplifier,
+            distanceFromSun: 14000 * distanceFromSunMultiplier,
             radius: earthRadius * 3.88,
-            orbitRotation: (360 / (165 * 365)) * rotationAmplifier,
-            axisRotation: (360 / 16) * rotationAmplifier, 
+            orbitRotation: (360 / (165 * 365)) * rotationMultiplier,
+            axisRotation: (360 / 16) * rotationMultiplier, 
             lightColor: 0x0000ff
         }
     ];
@@ -122,7 +122,7 @@ export function createPlanets(scene, planets, pCamera){
         sphere: sun,
 	radius: earthRadius * 50,
         parent: null,
-        axisRotation: (360 / (26 * 24)) * rotationAmplifier,
+        axisRotation: (360 / (26 * 24)) * rotationMultiplier,
         orbitRotation: null,
 	currentSegmentCount: 16
     });
@@ -142,7 +142,6 @@ export function createPlanets(scene, planets, pCamera){
         scene.add(parent);
 	
 	const blip = new Object3D();
-	blip.name = "blip";
 	sphere.add(blip);
 	blip.position.y += prop.radius;
 	
